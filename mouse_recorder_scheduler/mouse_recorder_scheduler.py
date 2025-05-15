@@ -2,7 +2,7 @@ import time
 import json
 import threading
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 from pynput import mouse, keyboard
 from datetime import datetime
 from pynput.mouse import Controller, Button
@@ -128,61 +128,110 @@ def update_status(message):
 
 def time_scheduler():
     global triggered_today
+    last_checked = datetime.now()
+    triggered_today = set()
+
     while True:
         now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")  # Use full time (HH:MM:SS) for comparison
+        current_time_24h = now.strftime("%H:%M:%S")  # 24-hour format
+        
+        # Detect manual time changes
+        time_diff = (now - last_checked).total_seconds()
+        if time_diff < 0 or time_diff > 3600:
+            triggered_today.clear()
+            update_status("System time change detected. Reset triggers.")
+        last_checked = now
 
-        # Compare current time with scheduled times
-        for time_str in list(scheduled_times):
-            if current_time.startswith(time_str):  # Check if current time matches the scheduled time
-                if time_str not in triggered_today:
-                    triggered_today.add(time_str)
+        # Check scheduled times (all stored in 24h format)
+        for time_str_24h in sorted(scheduled_times):
+            if current_time_24h.startswith(time_str_24h):
+                if time_str_24h not in triggered_today:
+                    triggered_today.add(time_str_24h)
+                    # Convert to 12h for display
+                    hour, minute, second = time_str_24h.split(':')
+                    hour_int = int(hour)
+                    if hour_int == 0:
+                        display_time = f"12:{minute}:{second} AM"
+                    elif hour_int < 12:
+                        display_time = f"{hour_int}:{minute}:{second} AM"
+                    elif hour_int == 12:
+                        display_time = f"12:{minute}:{second} PM"
+                    else:
+                        display_time = f"{hour_int-12}:{minute}:{second} PM"
+                    
+                    update_status(f"Triggering replay for {display_time}")
                     start_replay()
 
-        # Reset every midnight
-        if current_time == "00:00:00":
-            triggered_today.clear()
-
-        time.sleep(1)  # Check every second
+        time.sleep(1)
 
 def add_schedule_time():
-    time_str = time_entry.get().strip()
-    # Validate time format (HH:MM:SS or HH:MM)
-    if len(time_str) >= 5 and time_str[2] == ":" and time_str.replace(":", "").isdigit():
-        try:
-            if len(time_str) == 5:  # HH:MM format
-                scheduled_times.add(time_str + ":00")  # Add seconds as 00 for HH:MM
-            elif len(time_str) == 8:  # HH:MM:SS format
-                hours, minutes, seconds = map(int, time_str.split(":"))
-                if hours < 24 and minutes < 60 and seconds < 60:
-                    scheduled_times.add(time_str)
-                else:
-                    raise ValueError("Invalid time value.")
-            else:
-                raise ValueError("Invalid time format.")
-            update_time_listbox()
-            update_status(f"Added time {time_str}")
-            time_entry.delete(0, tk.END)
-        except ValueError as e:
-            messagebox.showerror("Invalid time", str(e))
+    hour = hour_var.get()
+    minute = minute_var.get()
+    second = second_var.get()
+    ampm = ampm_var.get()
+    
+    # Convert 12-hour format to 24-hour for internal storage
+    if ampm == "PM" and hour != "12":
+        hour_24 = str(int(hour) + 12)
+    elif ampm == "AM" and hour == "12":
+        hour_24 = "00"
     else:
-        messagebox.showerror("Invalid time", "Please enter time in HH:MM or HH:MM:SS format.")
+        hour_24 = hour.zfill(2)
+        
+    time_str_24h = f"{hour_24}:{minute}:{second}"
+    time_str_12h = f"{hour}:{minute}:{second} {ampm}"
+    
+    if time_str_24h not in scheduled_times:
+        scheduled_times.add(time_str_24h)
+        update_time_listbox()
+        update_status(f"Added time {time_str_12h}")
+    else:
+        update_status(f"Time {time_str_12h} already scheduled.")
 
 def delete_schedule_time():
     try:
         selected_time = time_listbox.get(time_listbox.curselection())
-        scheduled_times.remove(selected_time)
+        # Convert displayed 12h time back to 24h format for removal
+        time_str, ampm = selected_time.rsplit(' ', 1)
+        hour, minute, second = time_str.split(':')
+    
+        if ampm == "PM" and hour != "12":
+            hour_24 = str(int(hour) + 12)
+        elif ampm == "AM" and hour == "12":
+            hour_24 = "00"
+        else:
+            hour_24 = hour.zfill(2)
+            
+        time_str_24h = f"{hour_24}:{minute}:{second}"
+        
+        scheduled_times.remove(time_str_24h)
         update_time_listbox()
         update_status(f"Deleted time {selected_time}")
     except:
         messagebox.showerror("Error", "Please select a time to delete.")
 
-def update_time_listbox():
-    time_listbox.delete(0, tk.END)
+def update_time_listbox():  
+    time_listbox.delete(0, tk.END)  
     for t in sorted(scheduled_times):
-        time_listbox.insert(tk.END, t)
+        # Convert 24h time to 12h for display
+        hour, minute, second = t.split(':')
+        hour_int = int(hour)
+        
+        if hour_int == 0:
+            display_hour = "12"
+            ampm = "AM"
+        elif hour_int < 12:
+            display_hour = str(hour_int)
+            ampm = "AM"
+        elif hour_int == 12:
+            display_hour = "12"
+            ampm = "PM"
+        else:
+            display_hour = str(hour_int - 12)
+            ampm = "PM"
+            
+        time_listbox.insert(tk.END, f"{display_hour}:{minute}:{second} {ampm}")
 
-# --- Global Keyboard Listener ---
 def on_key_press(key):
     if key == keyboard.Key.f9:
         toggle_recording()
@@ -194,36 +243,64 @@ def start_keyboard_listener():
     listener.daemon = True
     listener.start()
 
-# --- GUI Setup ---
+# GUI Setup
 root = tk.Tk()
 root.title("Mouse Tracker + Click Recorder")
-root.geometry("320x400")
+root.geometry("400x450")
 root.resizable(False, False)
-root.attributes('-topmost', True)
 
-title_label = tk.Label(root, text="Mouse Recorder & Clicks", font=("Arial", 14))
-title_label.pack(pady=10)
+title_label = tk.Label(root, text="Mouse Recorder & Clicks", font=("Arial", 14)) 
+title_label.pack(pady=10) 
 
-record_button = tk.Button(root, text="Start Recording", width=20, command=toggle_recording)
-record_button.pack(pady=5)
+record_button = tk.Button(root, text="Start Recording", width=20, command=toggle_recording) 
+record_button.pack(pady=5) 
 
 replay_button = tk.Button(root, text="Replay", width=20, command=toggle_replay)
 replay_button.pack(pady=5)
 
-# Time input
-time_entry = tk.Entry(root, width=10)
-time_entry.pack(pady=2)
+# Time selection widgets
+hour_var = tk.StringVar(value="12")
+minute_var = tk.StringVar(value="00")
+second_var = tk.StringVar(value="00")
+ampm_var = tk.StringVar(value="AM")
+
+time_frame = tk.Frame(root)
+time_frame.pack(pady=5)
+
+# Hour dropdown (1-12)
+hour_label = tk.Label(time_frame, text="Hour:")
+hour_label.pack(side=tk.LEFT)
+hour_menu = ttk.Combobox(time_frame, textvariable=hour_var, 
+                        values=[f"{i}" for i in range(1, 13)], width=3, state="readonly")
+hour_menu.pack(side=tk.LEFT, padx=2)
+
+# Minute dropdown
+minute_label = tk.Label(time_frame, text="Min:")
+minute_label.pack(side=tk.LEFT)
+minute_menu = ttk.Combobox(time_frame, textvariable=minute_var, 
+                          values=[f"{i:02d}" for i in range(60)], width=3, state="readonly")
+minute_menu.pack(side=tk.LEFT, padx=2)
+
+# Second dropdown
+second_label = tk.Label(time_frame, text="Sec:")
+second_label.pack(side=tk.LEFT)
+second_menu = ttk.Combobox(time_frame, textvariable=second_var, 
+                          values=[f"{i:02d}" for i in range(60)], width=3, state="readonly")
+second_menu.pack(side=tk.LEFT, padx=2)
+
+# AM/PM dropdown
+ampm_menu = ttk.Combobox(time_frame, textvariable=ampm_var, 
+                        values=["AM", "PM"], width=3, state="readonly")
+ampm_menu.pack(side=tk.LEFT, padx=2)
 
 schedule_button = tk.Button(root, text="Add Replay Time", command=add_schedule_time)
-schedule_button.pack(pady=2)
+schedule_button.pack(pady=5)
 
-# Listbox to show times
-time_listbox = tk.Listbox(root, height=5)
+time_listbox = tk.Listbox(root, height=5, width=20)
 time_listbox.pack(pady=5)
 
-# Delete Button
 delete_button = tk.Button(root, text="Delete Selected Time", command=delete_schedule_time)
-delete_button.pack(pady=2)
+delete_button.pack(pady=5)
 
 status_label = tk.Label(root, text="Status: Idle", fg="blue")
 status_label.pack(pady=10)
@@ -233,7 +310,7 @@ instructions_label = tk.Label(
     text="Keyboard Shortcuts:\nF9  - Start/Stop Recording\nF10 - Start/Stop Replay",
     font=("Arial", 10),
     fg="gray"
-)
+) 
 instructions_label.pack(pady=5)
 
 # Start background services
