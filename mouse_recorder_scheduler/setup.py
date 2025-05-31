@@ -1,7 +1,8 @@
 from cx_Freeze import setup, Executable
 
 build_options = {
-    "packages": ["tkinter", "pynput", "threading", "json", "time", "datetime", "queue"],
+    "packages": ["pynput", "apscheduler", "tkinter", "logging", "json", "os", "threading", "time"],
+    "includes": ["pynput.keyboard", "pynput.mouse"],
     "excludes": [],
     "include_files": []
 }

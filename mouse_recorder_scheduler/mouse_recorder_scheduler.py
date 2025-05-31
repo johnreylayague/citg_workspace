@@ -1,320 +1,194 @@
-import time
-import json
 import threading
+import time
 import tkinter as tk
-from tkinter import messagebox, ttk
+import json
+import os
 from pynput import mouse, keyboard
-from datetime import datetime
-from pynput.mouse import Controller, Button
+import logging
+from logging.handlers import RotatingFileHandler
+from apscheduler.schedulers.background import BackgroundScheduler
 
-events_log = []
-recording = False
-replaying = False
-mouse_listener = None
-replay_thread = None
-scheduled_times = set()
-triggered_today = set()
+SAVE_PATH = "recorded_events.json"
 
-def on_move(x, y):
-    if recording:
-        timestamp = time.time()
-        events_log.append(("move", timestamp, x, y))
+# Logging setup
+logger = logging.getLogger("MouseRecorder")
+logger.setLevel(logging.INFO)
+handler = RotatingFileHandler("mouse_recorder.log", maxBytes=1_000_000, backupCount=5)
+handler.setFormatter(logging.Formatter("%(asctime)s - %(message)s", datefmt="%Y-%m-%d %I:%M:%S %p"))
+logger.addHandler(handler)
 
-def on_click(x, y, button, pressed):
-    if recording:
-        timestamp = time.time()
-        events_log.append(("click", timestamp, x, y, str(button), pressed))
+class MouseRecorder:
+    def __init__(self):
+        self.recording = False
+        self.playing = False
+        self.looping = False
+        self.events = []
+        self.start_time = None
+        self.lock = threading.Lock()
+        self.mouse_controller = mouse.Controller()
+        self.scheduler = BackgroundScheduler()
+        self.scheduler.start()
+        self.load_events()
 
-def start_recording():
-    global recording, events_log, mouse_listener
-    events_log = []
-    recording = True
-    update_status("Recording...")
+    def on_move(self, x, y):
+        if self.recording:
+            with self.lock:
+                self.events.append(('move', x, y, time.time() - self.start_time))
 
-    def run_mouse_listener():
-        global mouse_listener
-        mouse_listener = mouse.Listener(on_move=on_move, on_click=on_click)
-        mouse_listener.start()
-        mouse_listener.join()
+    def on_click(self, x, y, button, pressed):
+        if self.recording:
+            with self.lock:
+                self.events.append(('click', x, y, str(button), pressed, time.time() - self.start_time))
 
-    threading.Thread(target=run_mouse_listener, daemon=True).start()
-    record_button.config(text="Stop Recording")
-
-def stop_recording():
-    global recording, mouse_listener
-    recording = False
-    if mouse_listener:
-        mouse_listener.stop()
-    mouse_listener = None
-
-    with open("mouse_log.json", "w") as f:
-        json.dump(events_log, f)
-    update_status("Recording stopped and saved.")
-    record_button.config(text="Start Recording")
-
-def toggle_recording():
-    if recording:
-        stop_recording()
-    else:
-        start_recording()
-
-def toggle_replay():
-    global replaying
-    if replaying:
-        replaying = False  # Signal to stop
-        update_status("Replay stopping...")
-    else:
-        start_replay()
-
-def start_replay():
-    global replaying, replay_thread
-    def replay():
-        global replaying
-        root.attributes("-disabled", True)
-        try:
-            with open("mouse_log.json", "r") as f:
-                loaded_events = json.load(f)
-        except FileNotFoundError:
-            messagebox.showerror("Error", "No recording found.")
-            root.attributes("-disabled", False)
+    def toggle_recording(self, update_status_callback):
+        if self.playing or self.looping:
+            update_status_callback("Stop playback before recording.")
             return
 
-        if not loaded_events:
-            messagebox.showinfo("Info", "No events to replay.")
-            root.attributes("-disabled", False)
-            return
+        if self.recording:
+            self.recording = False
+            self.save_events()
+            return f"Recording stopped. {len(self.events)} events saved."
+        
+        self.events.clear()
+        self.start_time = time.time()
+        self.recording = True
+        return "Recording started..."
 
-        mouse_controller = Controller()
-        update_status("Replaying...")
-        replaying = True
-
-        for i, event in enumerate(loaded_events):
-            if not replaying:
+    def _play_once(self, update_status_callback):
+        self.playing = True
+        start_play = time.time()
+        for event in self.events:
+            if not self.playing:
+                update_status_callback("Playback stopped.")
                 break
+            wait = event[-1] - (time.time() - start_play)
+            if wait > 0:
+                time.sleep(wait)
 
-            event_type = event[0]
-            timestamp = event[1]
-            wait_time = 0
-            if i > 0:
-                wait_time = timestamp - loaded_events[i - 1][1]
-            time.sleep(wait_time)
-
-            if not replaying:
-                break
-
-            if event_type == "move":
-                _, _, x, y = event
-                mouse_controller.position = (x, y)
-            elif event_type == "click":
-                _, _, x, y, button_str, pressed = event
-                mouse_controller.position = (x, y)
-                button = Button.left if "left" in button_str else Button.right
+            if event[0] == 'move':
+                _, x, y, _ = event
+                self.mouse_controller.position = (x, y)
+            elif event[0] == 'click':
+                _, x, y, button, pressed, _ = event
+                self.mouse_controller.position = (x, y)
                 if pressed:
-                    mouse_controller.press(button)
+                    self.mouse_controller.press(eval(button))
                 else:
-                    mouse_controller.release(button)
+                    self.mouse_controller.release(eval(button))
+        self.playing = False
+        if not self.looping:
+            update_status_callback("Playback finished.")
 
-        replaying = False
-        update_status("Replay complete.")
-        root.attributes("-disabled", False)
-        root.lift()
-        root.focus_force()
+    def start_loop(self, interval, update_status_callback):
+        if self.recording:
+            update_status_callback("Stop recording before playback.")
+            return
+        if self.scheduler.get_job('auto_play'):
+            update_status_callback("Looping already active.")
+            return
+        if not self.events:
+            update_status_callback("No events recorded.")
+            return
 
-    replay_thread = threading.Thread(target=replay, daemon=True)
-    replay_thread.start()
+        self.looping = True
 
-def update_status(message):
-    status_label.config(text=f"Status: {message}")
+        def task():
+            logger.info("Auto playback started.")
+            try:
+                self._play_once(update_status_callback)
+            except Exception as e:
+                update_status_callback(f"Playback error: {e}")
+            logger.info("Auto playback finished.")
 
-def time_scheduler():
-    global triggered_today
-    last_checked = datetime.now()
-    triggered_today = set()
+        self.scheduler.add_job(task, 'interval', seconds=interval, id='auto_play')
+        update_status_callback(f"Auto playback every {interval:.0f}s.")
 
-    while True:
-        now = datetime.now()
-        current_time_24h = now.strftime("%H:%M:%S")  # 24-hour format
-        
-        # Detect manual time changes
-        time_diff = (now - last_checked).total_seconds()
-        if time_diff < 0 or time_diff > 3600:
-            triggered_today.clear()
-            update_status("System time change detected. Reset triggers.")
-        last_checked = now
+    def stop_playback(self):
+        self.playing = False
 
-        # Check scheduled times (all stored in 24h format)
-        for time_str_24h in sorted(scheduled_times):
-            if current_time_24h.startswith(time_str_24h):
-                if time_str_24h not in triggered_today:
-                    triggered_today.add(time_str_24h)
-                    # Convert to 12h for display
-                    hour, minute, second = time_str_24h.split(':')
-                    hour_int = int(hour)
-                    if hour_int == 0:
-                        display_time = f"12:{minute}:{second} AM"
-                    elif hour_int < 12:
-                        display_time = f"{hour_int}:{minute}:{second} AM"
-                    elif hour_int == 12:
-                        display_time = f"12:{minute}:{second} PM"
-                    else:
-                        display_time = f"{hour_int-12}:{minute}:{second} PM"
-                    
-                    update_status(f"Triggering replay for {display_time}")
-                    start_replay()
-
-        time.sleep(1)
-
-def add_schedule_time():
-    hour = hour_var.get()
-    minute = minute_var.get()
-    second = second_var.get()
-    ampm = ampm_var.get()
-    
-    # Convert 12-hour format to 24-hour for internal storage
-    if ampm == "PM" and hour != "12":
-        hour_24 = str(int(hour) + 12)
-    elif ampm == "AM" and hour == "12":
-        hour_24 = "00"
-    else:
-        hour_24 = hour.zfill(2)
-        
-    time_str_24h = f"{hour_24}:{minute}:{second}"
-    time_str_12h = f"{hour}:{minute}:{second} {ampm}"
-    
-    if time_str_24h not in scheduled_times:
-        scheduled_times.add(time_str_24h)
-        update_time_listbox()
-        update_status(f"Added time {time_str_12h}")
-    else:
-        update_status(f"Time {time_str_12h} already scheduled.")
-
-def delete_schedule_time():
-    try:
-        selected_time = time_listbox.get(time_listbox.curselection())
-        # Convert displayed 12h time back to 24h format for removal
-        time_str, ampm = selected_time.rsplit(' ', 1)
-        hour, minute, second = time_str.split(':')
-    
-        if ampm == "PM" and hour != "12":
-            hour_24 = str(int(hour) + 12)
-        elif ampm == "AM" and hour == "12":
-            hour_24 = "00"
+    def stop_loop(self, update_status_callback):
+        job = self.scheduler.get_job('auto_play')
+        if job:
+            job.remove()
+            self.looping = False
+            self.stop_playback()
+            update_status_callback("Looping stopped.")
         else:
-            hour_24 = hour.zfill(2)
-            
-        time_str_24h = f"{hour_24}:{minute}:{second}"
-        
-        scheduled_times.remove(time_str_24h)
-        update_time_listbox()
-        update_status(f"Deleted time {selected_time}")
-    except:
-        messagebox.showerror("Error", "Please select a time to delete.")
+            update_status_callback("Loop not active.")
 
-def update_time_listbox():  
-    time_listbox.delete(0, tk.END)  
-    for t in sorted(scheduled_times):
-        # Convert 24h time to 12h for display
-        hour, minute, second = t.split(':')
-        hour_int = int(hour)
-        
-        if hour_int == 0:
-            display_hour = "12"
-            ampm = "AM"
-        elif hour_int < 12:
-            display_hour = str(hour_int)
-            ampm = "AM"
-        elif hour_int == 12:
-            display_hour = "12"
-            ampm = "PM"
+    def save_events(self):
+        with open(SAVE_PATH, "w") as f:
+            json.dump(self.events, f)
+
+    def load_events(self):
+        if os.path.exists(SAVE_PATH):
+            with open(SAVE_PATH, "r") as f:
+                self.events = json.load(f)
+
+class App(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("Mouse Recorder")
+        self.geometry("400x250")
+        self.recorder = MouseRecorder()
+        mouse.Listener(on_move=self.recorder.on_move, on_click=self.recorder.on_click).start()
+        keyboard.Listener(on_press=self.on_key_press).start()
+        self.create_widgets()
+
+    def create_widgets(self):
+        self.record_btn = tk.Button(self, text="Start Recording (F9)", width=25, command=self.toggle_recording)
+        self.record_btn.pack(pady=10)
+
+        tk.Label(self, text="Auto Replay Interval (seconds):").pack()
+        self.delay_entry = tk.Entry(self)
+        self.delay_entry.pack(pady=5)
+        self.delay_entry.insert(0, "3600")
+
+        self.loop_btn = tk.Button(self, text="Start Auto Playback (F10)", width=25, command=self.toggle_loop)
+        self.loop_btn.pack(pady=10)
+
+        self.status_label = tk.Label(self, text="Status: Idle", fg="blue")
+        self.status_label.pack(pady=10)
+
+    def toggle_recording(self):
+        msg = self.recorder.toggle_recording(self.update_status)
+        if msg:
+            self.record_btn.config(text="Stop Recording (F9)" if self.recorder.recording else "Start Recording (F9)")
+            self.loop_btn.config(state="disabled" if self.recorder.recording else "normal")
+            self.update_status(msg)
+
+    def toggle_loop(self):
+        if self.recorder.recording:
+            self.update_status("Stop recording before playback.")
+            return
+
+        try:
+            interval = float(self.delay_entry.get())
+            if interval <= 0:
+                raise ValueError
+        except ValueError:
+            self.update_status("Invalid interval")
+            return
+
+        if self.recorder.scheduler.get_job('auto_play'):
+            self.recorder.stop_loop(self.update_status)
+            self.loop_btn.config(text="Start Auto Playback (F10)")
+            self.record_btn.config(state="normal")
         else:
-            display_hour = str(hour_int - 12)
-            ampm = "PM"
-            
-        time_listbox.insert(tk.END, f"{display_hour}:{minute}:{second} {ampm}")
+            self.recorder.start_loop(interval, self.update_status)
+            self.loop_btn.config(text="Stop Auto Playback (F10)")
+            self.record_btn.config(state="disabled")
 
-def on_key_press(key):
-    if key == keyboard.Key.f9:
-        toggle_recording()
-    elif key == keyboard.Key.f10:
-        toggle_replay()
+    def update_status(self, msg):
+        self.status_label.config(text=f"Status: {msg}")
 
-def start_keyboard_listener():
-    listener = keyboard.Listener(on_press=on_key_press)
-    listener.daemon = True
-    listener.start()
+    def on_key_press(self, key):
+        if key == keyboard.Key.f9:
+            self.after(0, self.toggle_recording)
+        elif key == keyboard.Key.f10:
+            self.after(0, self.toggle_loop)
 
-# GUI Setup
-root = tk.Tk()
-root.title("Mouse Tracker + Click Recorder")
-root.geometry("400x450")
-root.resizable(False, False)
-
-title_label = tk.Label(root, text="Mouse Recorder & Clicks", font=("Arial", 14)) 
-title_label.pack(pady=10) 
-
-record_button = tk.Button(root, text="Start Recording", width=20, command=toggle_recording) 
-record_button.pack(pady=5) 
-
-replay_button = tk.Button(root, text="Replay", width=20, command=toggle_replay)
-replay_button.pack(pady=5)
-
-# Time selection widgets
-hour_var = tk.StringVar(value="12")
-minute_var = tk.StringVar(value="00")
-second_var = tk.StringVar(value="00")
-ampm_var = tk.StringVar(value="AM")
-
-time_frame = tk.Frame(root)
-time_frame.pack(pady=5)
-
-# Hour dropdown (1-12)
-hour_label = tk.Label(time_frame, text="Hour:")
-hour_label.pack(side=tk.LEFT)
-hour_menu = ttk.Combobox(time_frame, textvariable=hour_var, 
-                        values=[f"{i}" for i in range(1, 13)], width=3, state="readonly")
-hour_menu.pack(side=tk.LEFT, padx=2)
-
-# Minute dropdown
-minute_label = tk.Label(time_frame, text="Min:")
-minute_label.pack(side=tk.LEFT)
-minute_menu = ttk.Combobox(time_frame, textvariable=minute_var, 
-                          values=[f"{i:02d}" for i in range(60)], width=3, state="readonly")
-minute_menu.pack(side=tk.LEFT, padx=2)
-
-# Second dropdown
-second_label = tk.Label(time_frame, text="Sec:")
-second_label.pack(side=tk.LEFT)
-second_menu = ttk.Combobox(time_frame, textvariable=second_var, 
-                          values=[f"{i:02d}" for i in range(60)], width=3, state="readonly")
-second_menu.pack(side=tk.LEFT, padx=2)
-
-# AM/PM dropdown
-ampm_menu = ttk.Combobox(time_frame, textvariable=ampm_var, 
-                        values=["AM", "PM"], width=3, state="readonly")
-ampm_menu.pack(side=tk.LEFT, padx=2)
-
-schedule_button = tk.Button(root, text="Add Replay Time", command=add_schedule_time)
-schedule_button.pack(pady=5)
-
-time_listbox = tk.Listbox(root, height=5, width=20)
-time_listbox.pack(pady=5)
-
-delete_button = tk.Button(root, text="Delete Selected Time", command=delete_schedule_time)
-delete_button.pack(pady=5)
-
-status_label = tk.Label(root, text="Status: Idle", fg="blue")
-status_label.pack(pady=10)
-
-instructions_label = tk.Label(
-    root,
-    text="Keyboard Shortcuts:\nF9  - Start/Stop Recording\nF10 - Start/Stop Replay",
-    font=("Arial", 10),
-    fg="gray"
-) 
-instructions_label.pack(pady=5)
-
-# Start background services
-start_keyboard_listener()
-threading.Thread(target=time_scheduler, daemon=True).start()
-
-root.mainloop()
+if __name__ == "__main__":
+    app = App()
+    app.mainloop()

@@ -14,7 +14,7 @@
 # Step 3: Build the executable using cx_Freeze:
 #     python setup.py build
 
-# Step 4: Go to the /build/ folder and run the .exe file
+# Step 4: Go to the /build/ folder and run the MouseRecorder.exe file
 
 # Notes:
 # - Python 3.13.3 64-bit recommended (installer: python-3.13.3-amd64.exe)
@@ -29,3 +29,4 @@ cx-Freeze
 
 # For mouse and keyboard input
 pynput
+apscheduler
