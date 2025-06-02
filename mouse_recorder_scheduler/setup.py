@@ -1,27 +1,27 @@
 from cx_Freeze import setup, Executable
 
 build_options = {
-    "packages": ["pynput", "apscheduler", "tkinter", "logging", "json", "os", "threading", "time"],
-    "includes": ["pynput.keyboard", "pynput.mouse"],
+    "packages": ["pynput", "tkinter", "threading", "json", "time", "queue"],
+    "includes": ["pynput.mouse", "pynput.keyboard"],
     "excludes": [],
-    "include_files": []
+    "include_files": ["pointer.ico"],  # Add your icon file here
 }
 
-base = "Win32GUI"  # Use "Win32GUI" for no console, None for console
+base = "Win32GUI"  # No console window on Windows
 
 executables = [
     Executable(
-        "mouse_recorder_scheduler.py",  # Your script name
+        script="mouse_recorder_scheduler.py",     # Your main script name here
         base=base,
-        icon="pointer.ico",  # Replace with your .ico file
-        target_name="Mouse Recorder.exe"  # Optional: Rename the output .exe
+        target_name="Mouse Recorder.exe",
+        icon="pointer.ico"
     )
 ]
 
 setup(
     name="Mouse Recorder",
     version="1.0",
-    description="Mouse and Click Recorder with Scheduler",
+    description="Simple Mouse Auto-Replay with Hotkeys",
     options={"build_exe": build_options},
     executables=executables
 )
