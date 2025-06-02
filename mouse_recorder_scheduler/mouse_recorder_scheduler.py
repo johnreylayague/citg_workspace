@@ -6,6 +6,7 @@ import os
 from pynput import mouse, keyboard
 import logging
 from logging.handlers import RotatingFileHandler
+from apscheduler.executors.pool import ThreadPoolExecutor
 from apscheduler.schedulers.background import BackgroundScheduler
 
 SAVE_PATH = "recorded_events.json"
@@ -26,7 +27,10 @@ class MouseRecorder:
         self.start_time = None
         self.lock = threading.Lock()
         self.mouse_controller = mouse.Controller()
-        self.scheduler = BackgroundScheduler()
+        self.scheduler = BackgroundScheduler(
+            daemon=True,
+            executors={'default': ThreadPoolExecutor(1)}
+        )
         self.scheduler.start()
         self.load_events()
 
@@ -34,7 +38,7 @@ class MouseRecorder:
         if self.recording:
             with self.lock:
                 self.events.append(('move', x, y, time.time() - self.start_time))
-
+  
     def on_click(self, x, y, button, pressed):
         if self.recording:
             with self.lock:
@@ -58,6 +62,7 @@ class MouseRecorder:
     def _play_once(self, update_status_callback):
         self.playing = True
         start_play = time.time()
+  
         for event in self.events:
             if not self.playing:
                 update_status_callback("Playback stopped.")
@@ -76,6 +81,7 @@ class MouseRecorder:
                     self.mouse_controller.press(eval(button))
                 else:
                     self.mouse_controller.release(eval(button))
+
         self.playing = False
         if not self.looping:
             update_status_callback("Playback finished.")
@@ -101,7 +107,14 @@ class MouseRecorder:
                 update_status_callback(f"Playback error: {e}")
             logger.info("Auto playback finished.")
 
-        self.scheduler.add_job(task, 'interval', seconds=interval, id='auto_play')
+        self.scheduler.add_job(
+            task,
+            'interval',
+            seconds=interval,
+            id='auto_play',
+            max_instances=1,
+            replace_existing=True
+        )
         update_status_callback(f"Auto playback every {interval:.0f}s.")
 
     def stop_playback(self):
