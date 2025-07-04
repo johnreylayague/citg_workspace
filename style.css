@@ -1931,17 +1931,31 @@ form input[type="reset"]:after {
   height: 0;
 }
 .hero-slider .slides li {
-  height: 500px;
+  height: 650px;
   background-size: cover;
   background-position: center center;
 }
 .hero-slider .slide-title {
   font-size: 36px;
   font-size: 2.5714285714em;
-  margin-top: 200px;
+  margin-top: 330px;
   letter-spacing: 3px;
-  text-align: right;
+  text-align: left;
 }
+
+@media (max-width: 600px) {
+  .hero-slider .slide-title {
+    margin-top: 290px;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-slider .slide-title {
+    margin-top: 350px;
+    font-size: 25px;
+  }
+}
+
 .hero-slider .slide-title span {
   display: inline-block;
   padding: 10px 15px;
@@ -2014,6 +2028,13 @@ form input[type="reset"]:after {
   color: #1a1a1a;
 }
 
+@media (max-width: 768px) {
+  .section-title,
+  .section-title + p {
+    text-align: center;
+  }
+}
+
 .separator {
   border: none;
   border-top: 1px solid #383838;
@@ -2024,12 +2045,24 @@ form input[type="reset"]:after {
 .project {
   margin-bottom: 30px;
 }
+@media (max-width: 768px) {
+  .project {
+    text-align: center;
+  }
+}
+
 .project .project-thumbnail {
   margin-bottom: 20px;
 }
 .project .project-thumbnail img {
   max-width: 100%;
   display: block;
+}
+
+@media (max-width: 768px) {
+  .project .project-thumbnail img {
+    margin: 0 auto;
+  }
 }
 .project .project-title {
   font-size: 18px;
@@ -2090,9 +2123,21 @@ form input[type="reset"]:after {
   background: url(images/paging-active.png) no-repeat;
 }
 
+@media screen and (max-width: 768px) {
+  .testimonial-slider {
+    text-align: center;
+  }
+}
+
 .news {
   list-style: none;
 }
+@media screen and (max-width: 768px) {
+  .news {
+    text-align: center;
+  }
+}
+
 .news .date {
   font-size: 13px;
   font-size: 0.9285714286em;
