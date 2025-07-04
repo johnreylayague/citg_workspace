@@ -6,17 +6,21 @@ from tkinter import messagebox
 from pynput import mouse, keyboard
 from pynput.mouse import Controller, Button
 import logging
+from logging.handlers import RotatingFileHandler
 import gc
 import psutil
 import os
 
-# Setup logging to file with 12-hour format and PH-style date
-logging.basicConfig(
-    filename="mouse_replay.log",
-    level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
+# Setup rotating logging with 1MB per file, keeping 3 backups
+log_handler = RotatingFileHandler(
+    "mouse_replay.log", maxBytes=1_000_000, backupCount=3
+)
+log_formatter = logging.Formatter(
+    fmt="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%I:%M:%S %p %m/%d/%Y"
 )
+log_handler.setFormatter(log_formatter)
+logging.basicConfig(level=logging.INFO, handlers=[log_handler])
 
 recording = False
 replaying = False
@@ -29,10 +33,13 @@ stop_replay_event = threading.Event()
 def now():
     return time.monotonic()
 
-def log_memory_usage():
-    process = psutil.Process(os.getpid())
-    mem = process.memory_info().rss / (1024 * 1024)  # MB
-    logging.info(f"Memory usage: {mem:.2f} MB")
+def get_memory_usage():
+    try:
+        process = psutil.Process(os.getpid())
+        return process.memory_info().rss / (1024 * 1024)  # in MB
+    except Exception as e:
+        logging.error(f"Memory reading error: {e}")
+        return 0.0
 
 def on_move(x, y):
     if recording:
@@ -74,7 +81,8 @@ def stop_recording():
             json.dump(events_log, f)
         logging.info("Recording stopped and saved to mouse_log.json.")
         update_status("Recording saved.")
-        log_memory_usage()
+        mem = get_memory_usage()
+        logging.info(f"Memory usage: {mem:.2f} MB")
     except Exception as e:
         logging.error("Save error", exc_info=True)
         update_status(f"Save error: {type(e).__name__}: {e}")
@@ -121,6 +129,8 @@ def start_replay():
 
         while not stop_replay_event.is_set():
             start_time = now()
+            mem_before = get_memory_usage()
+
             for i, event in enumerate(loaded_events):
                 if stop_replay_event.is_set():
                     break
@@ -145,10 +155,11 @@ def start_replay():
                     update_status(f"Replay event error: {type(e).__name__}: {e}")
 
             elapsed = now() - start_time
-            logging.info("Replay cycle completed.")
             gc.collect()
-            logging.info("Garbage collection completed.")
-            log_memory_usage()
+            mem_after = get_memory_usage()
+            released = mem_before - mem_after
+            logging.info("Replay cycle completed.")
+            logging.info(f"Memory before GC: {mem_before:.2f} MB, after GC: {mem_after:.2f} MB, released: {released:.2f} MB")
             remaining = max(0, interval_seconds - elapsed)
             if stop_replay_event.wait(timeout=remaining):
                 break
