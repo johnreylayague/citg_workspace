@@ -30,3 +30,4 @@ cx-Freeze
 # For mouse and keyboard input
 pynput
 apscheduler
+psutil

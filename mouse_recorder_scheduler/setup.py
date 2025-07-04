@@ -1,7 +1,18 @@
 from cx_Freeze import setup, Executable
 
 build_options = {
-    "packages": ["pynput", "tkinter", "threading", "json", "time", "queue"],
+ "packages": [
+        "pynput",
+        "tkinter",
+        "threading",
+        "json",  
+        "time", 
+        "queue",
+        "logging",
+        "gc",
+        "psutil",
+        "os"
+    ],
     "includes": ["pynput.mouse", "pynput.keyboard"],
     "excludes": [],
     "include_files": ["pointer.ico"],  # Add your icon file here
