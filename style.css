@@ -1697,6 +1697,22 @@ form input[type="reset"]:hover {
   width: 30%;
   padding: 30px;
 }
+@media screen and (max-width: 768px) {
+  .branding {
+    padding: 15px;
+  }
+  .branding .site-title {
+    font-size: 15px;
+  }
+  .branding img {
+    height: 80px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .branding {
+    padding: 25px;
+  }
+}
 @media screen and (max-width: 990px) {
   .subscribe-form {
     width: 100%;
