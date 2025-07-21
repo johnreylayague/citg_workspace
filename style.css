@@ -1827,7 +1827,11 @@ form input[type="reset"]:after {
   font-size: 0.7857142857em;
   color: #585858;
 }
-
+@media screen and (max-width: 768px) {
+  #branding .logo {
+    height: 60px;
+  }
+}
 .main-navigation {
   float: right;
 }
@@ -1931,28 +1935,51 @@ form input[type="reset"]:after {
   height: 0;
 }
 .hero-slider .slides li {
-  height: 650px;
+  height: 350px;
   background-size: cover;
   background-position: center center;
 }
 .hero-slider .slide-title {
   font-size: 36px;
   font-size: 2.5714285714em;
-  margin-top: 330px;
+  margin-top: 400px;
   letter-spacing: 3px;
   text-align: left;
 }
 
-@media (max-width: 600px) {
+@media screen and (max-width: 992px) {
   .hero-slider .slide-title {
-    margin-top: 290px;
+    margin-top: 250px;
+    max-width: 500px;
+    width: 100%;
   }
 }
 
-@media (max-width: 400px) {
+@media screen and (max-width: 768px) {
   .hero-slider .slide-title {
-    margin-top: 350px;
+    margin-top: 140px;
+    max-width: 380px;
+    width: 100%;
+  }
+  .hero-slider .slide-title span {
     font-size: 25px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .hero-slider .slide-title {
+    margin-top: 150px;
+    max-width: 290px;
+  }
+  .hero-slider .slide-title span {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .hero-slider .slide-title {
+    margin-top: 150px;
+    max-width: 200px;
   }
 }
 
@@ -1976,14 +2003,34 @@ form input[type="reset"]:after {
   padding: 0 15px;
   text-align: right;
 }
+
+@media (max-width: 400px) {
+  .hero-slider .slide-title {
+    margin-top: 170px;
+    max-width: 130px;
+  }
+  .hero-slider .slide-title span {
+    font-size: 15px;
+  }
+  .hero-slider .flex-direction-nav {
+    bottom: 40px;
+  }
+}
+
 @media screen and (min-width: 768px) {
   .hero-slider .flex-direction-nav {
     width: 750px;
+  }
+  .hero-slider .slides li {
+    height: 450px;
   }
 }
 @media screen and (min-width: 992px) {
   .hero-slider .flex-direction-nav {
     width: 970px;
+  }
+  .hero-slider .slides li {
+    height: 650px;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -2032,6 +2079,13 @@ form input[type="reset"]:after {
   .section-title,
   .section-title + p {
     text-align: center;
+  }
+  .hero-slider .flex-direction-nav li a.flex-next {
+    background-size: contain;
+  }
+  .hero-slider .flex-direction-nav li a {
+    height: 54px;
+    width: 54px;
   }
 }
 
