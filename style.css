@@ -1829,7 +1829,7 @@ form input[type="reset"]:after {
 }
 @media screen and (max-width: 768px) {
   #branding .logo {
-    height: 60px;
+    height: 80px;
   }
 }
 .main-navigation {
@@ -2522,6 +2522,10 @@ form input[type="reset"]:after {
 .site-footer .phone {
   font-size: 18px;
   font-size: 1.2857142857em;
+}
+.site-footer .phone mark {
+  background-color: transparent;
+  color: #e02d8d;
 }
 .site-footer .colophon {
   color: #acacac;
