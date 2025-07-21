@@ -1,5 +1,14 @@
 (function ($, document, window) {
   $(document).ready(function () {
+    // Change site-header background on scroll
+    $(window).on("scroll", function () {
+      if ($(window).scrollTop() > 0) {
+        $(".site-header").addClass("scrolled");
+      } else {
+        $(".site-header").removeClass("scrolled");
+      }
+    });
+
     // Cloning main navigation for mobile menu
     $(".mobile-navigation").append($(".main-navigation .menu").clone());
 
