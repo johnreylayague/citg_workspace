@@ -1628,6 +1628,10 @@ form input[type="reset"]:hover {
   font-size: 13px;
   font-size: 0.9285714286em;
   color: #9d9997;
+  max-width: 100%;
+  width: 120px;
+  display: block;
+  margin: 0 auto;
 }
 .branding img {
   height: 100px;
