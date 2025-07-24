@@ -10,7 +10,7 @@ https://www.avidaland.com/properties/house-and-lot/serin-terraces-tagaytay
 https://suntrust.com.ph/ - footer
 https://i.imgur.com/vtJN0bc.png - footer
 https://www.figma.com/community/file/941725495131361898
-
+ 
 https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStZzbk1j6oUXLB2PgdjcoJa_8Ek_uwt9rd6g&s - footer sample
 
 https://www.figma.com/design/9EHFdlJj9PjrnPnOCoyAtB/50--FREE-Footers--Community-?node-id=108-2&p=f&t=BmUhCeyFfFzJ5Qak-0 - figma footer links
@@ -70,3 +70,6 @@ with schools, malls, hospitals, churches, and
 Club Ultima just steps away. Live where
 convenience meets lifestyle and everything
 you need is always within reach!
+
+------------------
+1. download bruchure
