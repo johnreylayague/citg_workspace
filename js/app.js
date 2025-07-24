@@ -12,6 +12,49 @@
   });
 
   $(window).load(function () {
+    var $container = $(".filterable-items");
+
+    $container.isotope({
+      filter: "*",
+      layoutMode: "fitRows",
+      animationOptions: {
+        duration: 750,
+        easing: "linear",
+        queue: false,
+      },
+    });
+
+    $(".filterable-nav a").click(function (e) {
+      e.preventDefault();
+      $(".filterable-nav .current").removeClass("current");
+      $(this).addClass("current");
+
+      var selector = $(this).attr("data-filter");
+      $container.isotope({
+        filter: selector,
+        animationOptions: {
+          duration: 750,
+          easing: "linear",
+          queue: false,
+        },
+      });
+      return false;
+    });
+    $(".mobile-filter").change(function () {
+      var selector = $(this).val();
+      $container.isotope({
+        filter: selector,
+        animationOptions: {
+          duration: 750,
+          easing: "linear",
+          queue: false,
+        },
+      });
+      return false;
+    });
+  });
+
+  $(window).load(function () {
     $(".feature-slider").flexslider({
       directionNav: true,
       controlNav: false,
