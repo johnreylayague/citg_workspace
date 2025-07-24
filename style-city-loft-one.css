@@ -1904,7 +1904,6 @@ form input[type="reset"]:hover {
   *zoom: 1;
   background: #262322;
   position: relative;
-  padding-left: 50%;
 }
 .post-list .post:after {
   content: " ";
@@ -1919,6 +1918,48 @@ form input[type="reset"]:hover {
     padding-right: 0;
   }
 }
+
+.collage {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 0;
+  width: 100%;
+}
+
+.collage figure {
+  margin: 0;
+  padding: 0;
+}
+
+.collage img {
+  width: 100%;
+  height: 250px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.post-list .post .feature-image {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: auto;
+}
+
+.post-list .post .feature-image figure {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.post-list .post .feature-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
 .post-list .post .feature-image img,
 .post-list .post .feature-image iframe,
 .post-list .post .post-detail img,
