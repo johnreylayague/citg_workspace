@@ -9,6 +9,26 @@
     });
 
     $("#year").text(new Date().getFullYear());
+
+    const lightbox = GLightbox({
+      selector: ".glightbox",
+    });
+
+    $(".skitter-large").skitter({
+      responsive: {
+        small: {
+          animation: "fade",
+          max_width: 768,
+          suffix: "-small",
+        },
+        medium: {
+          animation: "directionRight",
+          max_width: 1024,
+          suffix: "-medium",
+        },
+      },
+      dots: false,
+    });
   });
 
   $(window).load(function () {
@@ -40,6 +60,7 @@
       });
       return false;
     });
+
     $(".mobile-filter").change(function () {
       var selector = $(this).val();
       $container.isotope({

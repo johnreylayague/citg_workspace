@@ -2056,7 +2056,7 @@ form input[type="reset"]:hover {
   margin-right: 10px;
   border: 2px solid #383838;
   position: relative;
-  color: #d3d3d3;
+  color: #303030;
   text-transform: uppercase;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
@@ -2068,13 +2068,6 @@ form input[type="reset"]:hover {
 }
 .filterable-nav a:before,
 .filterable-nav a:after {
-  content: " ";
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  background: #212121;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
 }
 .filterable-nav a:before {
   border-bottom: 2px solid #383838;
@@ -2179,8 +2172,8 @@ form input[type="reset"]:hover {
 }
 
 .project-item figure {
-  /* height: auto;
-  width: 100%; */
+  height: 400px;
+  width: 100%;
 }
 
 .project-item figure img {
@@ -2229,3 +2222,24 @@ form input[type="reset"]:hover {
 .social-links a.pinterest {
   background-color: #ca2128;
 }
+
+/* start of skitter */
+/* .skitter-large-box .skitter {
+  width: 100% !important;
+  max-width: 100%;
+}
+
+.skitter-large-box .skitter .container_skitter {
+  width: 100% !important;
+}
+.skitter-large-box .skitter .container_skitter .image .image_main {
+  object-fit: cover;
+  object-position: center;
+  height: 100% !important;
+  width: 100% !important;
+}
+.skitter-large-box .skitter .container_skitter .image {
+  height: 400px;
+  width: 100%;
+} */
+/* end of skitter */
