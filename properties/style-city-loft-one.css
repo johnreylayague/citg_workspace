@@ -1762,14 +1762,12 @@ form input[type="reset"]:hover {
   font-size: 1.2857142857em;
   padding: 15px 20px;
 }
-
 .section-title {
   font-size: 36px;
   font-size: 2.5714285714em;
   font-weight: 300;
   margin-bottom: 1em;
 }
-
 .arrow-list {
   list-style: none;
   font-size: 18px;
@@ -1782,7 +1780,6 @@ form input[type="reset"]:hover {
   -moz-column-gap: 0;
   column-gap: 10px;
 }
-
 @media screen and (max-width: 640px) {
   .arrow-list {
     column-count: 21;
@@ -1797,7 +1794,6 @@ form input[type="reset"]:hover {
     width: 100%;
   }
 }
-
 .arrow-list li {
   position: relative;
   padding-left: 40px;
