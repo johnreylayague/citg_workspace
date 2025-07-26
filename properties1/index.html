@@ -102,6 +102,33 @@
         font-weight: 400;
         color: #fff;
       }
+      .section-concept {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        background-image: linear-gradient(
+          90deg,
+          #d0d0d0 50%,
+          hsla(0, 0%, 100%, 0) 0
+        );
+        background-position: bottom;
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
+      }
+      .section-title {
+        color: #b79e69;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.25;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+      .section-subtitle {
+        color: #303030;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.33;
+      }
+
       .google-map-location {
         height: 500px;
         width: 100%;
@@ -176,7 +203,6 @@
       }
 
       .filterable-items {
-        *zoom: 1;
       }
       .filterable-items:after {
         content: " ";
@@ -229,7 +255,6 @@
       }
       .project-images .thumbs {
         margin: 0 -10px;
-        *zoom: 1;
         margin-top: 30px;
       }
       .project-images .thumbs:after {
@@ -321,8 +346,8 @@
         <div class="fullwidth-block">
           <div class="container">
             <div class="section-concept">
-              <h4>Prime Location</h4>
-              <h3>Urban Living at its Best</h3>
+              <h4 class="section-title">Prime Location</h4>
+              <h3 class="section-subtitle">Urban Living at its Best</h3>
               <p>
                 City Loft One offers the best value for owning a home in the
                 city — an opportunity to invest in a property that’s truly worth
@@ -338,8 +363,8 @@
               </p>
             </div>
             <div class="section-amenities">
-              <h4>Property Features</h4>
-              <h3>Premium Comfort, Practical Value</h3>
+              <h4 class="section-title">Property Features</h4>
+              <h3 class="section-subtitle">Premium Comfort, Practical Value</h3>
               <ul class="arrow-list">
                 <li>24-Hour Security</li>
                 <li>2 High-speed Elevators</li>
@@ -353,8 +378,10 @@
               </ul>
             </div>
             <div class="section-location">
-              <h4>Location</h4>
-              <h3>21a General Maxilom AveCebu City, 6000 Cebu</h3>
+              <h4 class="section-title">Location</h4>
+              <h3 class="section-subtitle">
+                21a General Maxilom AveCebu City, 6000 Cebu
+              </h3>
               <p>
                 Cityloft Condominium General Maxilom Ave. Cebu City. Beside old
                 Sacred Heart School for Boys and right across DOLE-7 building
@@ -372,8 +399,8 @@
               </div>
             </div>
             <div class="section-gallery">
-              <h4>CitiLoft Views</h4>
-              <h3>Your Future Home, Today</h3>
+              <h4 class="section-title">CitiLoft Views</h4>
+              <h3 class="section-subtitle">Your Future Home, Today</h3>
 
               <div class="filter-links filterable-nav">
                 <select class="mobile-filter">
