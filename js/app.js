@@ -17,6 +17,7 @@
     $(".skitter-large").skitter({
       interval: 3000,
       dots: false,
+      stop_over: false,
     });
   });
 

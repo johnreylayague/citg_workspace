@@ -1588,15 +1588,12 @@ form input[type="reset"]:hover {
  */
 .site-header {
   position: relative;
-  min-height: 760px;
   overflow: hidden;
-  /* padding-top: 549px; */
-  min-height: 650px;
 }
 
 .skitter {
-  max-width: 1366px;
-  width: 1366px !important;
+  max-width: 1920px;
+  width: 1920px !important;
 }
 
 .skitter-large-box {
@@ -1604,6 +1601,7 @@ form input[type="reset"]:hover {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
+  z-index: -1;
 }
 
 .container-logo {
@@ -1611,20 +1609,34 @@ form input[type="reset"]:hover {
 }
 
 .container-skitter {
-  height: 549px;
+  height: 820px;
+  position: relative;
 }
 
 .skitter a {
   pointer-events: none;
 }
-
-.branding,
-.banner,
-.subscribe-form {
-  z-index: 50;
+.mobile-skitter {
+  display: none;
 }
 
 @media screen and (max-width: 990px) {
+  .skitter {
+    max-width: 900px;
+    width: 900px !important;
+  }
+
+  .container-skitter {
+    height: 500px;
+    position: relative;
+  }
+
+  .skitter-large-box {
+    display: none;
+  }
+  .skitter-large-box.mobile-skitter {
+    display: block;
+  }
 }
 
 .branding {
@@ -1717,20 +1729,16 @@ form input[type="reset"]:hover {
   width: 30%;
   padding: 30px;
 }
-@media screen and (max-width: 768px) {
+
+@media screen and (max-width: 992px) {
   .branding {
-    padding: 15px;
+    padding: 10px;
   }
   .branding .site-title {
     font-size: 15px;
   }
   .branding img {
     height: 80px;
-  }
-}
-@media screen and (max-width: 992px) {
-  .branding {
-    padding: 25px;
   }
 }
 @media screen and (max-width: 990px) {
