@@ -35,45 +35,269 @@
     />
     <link href="/fonts/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-    <!-- Loading main css file -->
-    <link rel="stylesheet" href="/properties/style-city-loft-one.css" />
     <link rel="stylesheet" href="/plugins/skitter-master/dist/skitter.css" />
     <link
       rel="stylesheet"
       href="/plugins/glightbox-3.3.0/dist/css/glightbox.min.css"
     />
-
+    <!-- Loading main css file -->
+    <link rel="stylesheet" href="/properties/style.css" />
     <!--[if lt IE 9]>
-      <script src="js/ie-support/html5.js"></script>
-      <script src="js/ie-support/respond.js"></script>
+      <script src="js/ie-support/html5.js"></script> 
+      <sc src="js/ie-support/respond.js"></sc ript>
     <![endif]-->
-    <style></style>
-  </head>
+    <style>
+      .nhome-banner {
+        overflow: hidden;
+      }
+      .nhome-banner-fig {
+        height: 600px;
+        width: 100%;
+        max-width: 1920px;
+        margin: 0 auto;
+      }
+      .nhome-banner-fig img {
+        height: 100%;
+        width: 100%;
+        object-position: center;
+        object-fit: cover;
+      }
+      .property-details {
+        background: #262322;
+        border-radius: 5px;
+        padding: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .property-logo {
+      }
+      .property-logo figure {
+        height: 81px;
+        width: 133px;
+        padding: 5px;
+        margin: auto;
+        background-color: #fff;
+      }
+      .property-logo figure img {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+        object-position: center;
+      }
+      .property-details {
+        margin-top: -70px;
+        position: relative;
+      }
+      .property-details .property-item {
+        border-right: 1px solid #37322f;
+        text-align: left;
+        padding: 1.5rem;
+      }
+      .property-details .property-item:last-child {
+        border-right: none;
+      }
+      .property-details h5 {
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+      .property-details h6 {
+        font-size: 13px;
+        font-weight: 400;
+        color: #fff;
+      }
+      .divider-bottom {
+        padding-bottom: 2rem;
+        margin-bottom: 2rem;
+        background-image: linear-gradient(
+          90deg,
+          #d0d0d0 50%,
+          hsla(0, 0%, 100%, 0) 0
+        );
+        background-position: bottom;
+        background-size: 10px 1px;
+        background-repeat: repeat-x;
+      }
+      .section-title {
+        color: #b79e69;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.25;
+        margin-bottom: 6px;
+        text-transform: uppercase;
+      }
+      .section-subtitle {
+        color: #303030;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 1.33;
+      }
 
+      .google-map-location {
+        height: 500px;
+        width: 100%;
+      }
+
+      .filterable-nav {
+        margin: 50px 0;
+      }
+      .filterable-nav .mobile-filter {
+        display: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        border: 2px solid #f4c545;
+        padding: 10px 20px;
+        color: #f4c545;
+        border-radius: 0;
+        background: none;
+        text-transform: uppercase;
+        outline: none;
+      }
+      @media screen and (max-width: 768px) {
+        .filterable-nav .mobile-filter {
+          display: block;
+        }
+      }
+      .filterable-nav a {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-right: 10px;
+        border: 2px solid #383838;
+        position: relative;
+        color: #303030;
+        text-transform: uppercase;
+        -webkit-transition: 0.3s ease;
+        transition: 0.3s ease;
+      }
+      @media screen and (max-width: 768px) {
+        .filterable-nav a {
+          display: none;
+        }
+      }
+      .filterable-nav a:before,
+      .filterable-nav a:after {
+      }
+      .filterable-nav a:before {
+        border-bottom: 2px solid #383838;
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: -10px;
+        left: -10px;
+      }
+      .filterable-nav a:after {
+        border-top: 2px solid #383838;
+        -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        bottom: -10px;
+        right: -10px;
+      }
+      .filterable-nav a.current,
+      .filterable-nav a:hover {
+        border-color: #f4c545;
+        color: #f4c545;
+      }
+      .filterable-nav a.current:before,
+      .filterable-nav a.current:after,
+      .filterable-nav a:hover:before,
+      .filterable-nav a:hover:after {
+        border-color: #f4c545;
+      }
+
+      .filterable-items {
+        margin: 0 -15px;
+      }
+      .filterable-items:after {
+        content: " ";
+        clear: both;
+        display: block;
+        overflow: hidden;
+        height: 0;
+      }
+
+      .project-item {
+        width: 33.333%;
+        padding: 0 15px;
+        margin-bottom: 30px;
+        float: left;
+      }
+      @media screen and (max-width: 768px) {
+        .project-item {
+          width: 50%;
+        }
+      }
+      @media screen and (max-width: 480px) {
+        .project-item {
+          width: 100%;
+        }
+      }
+      .project-item img {
+        max-width: 100%;
+        margin-bottom: 20px;
+        display: block;
+      }
+      .project-item .project-title {
+        font-size: 18px;
+        font-size: 1.2857142857em;
+        margin-bottom: 0;
+        letter-spacing: 2px;
+        font-weight: 300;
+        text-transform: uppercase;
+        color: #f4c545;
+      }
+      .project-item .project-subtitle {
+        font-size: 12px;
+        font-size: 0.8571428571em;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        color: white;
+      }
+
+      .project-images img {
+        max-width: 100%;
+      }
+      .project-images .thumbs {
+        margin: 0 -10px;
+        margin-top: 30px;
+      }
+      .project-images .thumbs:after {
+        content: " ";
+        clear: both;
+        display: block;
+        overflow: hidden;
+        height: 0;
+      }
+      .project-images .thumbs a {
+        width: 33.3333%;
+        display: block;
+        float: left;
+        text-align: center;
+      }
+      .project-images .thumbs a img {
+        max-width: 100%;
+      }
+
+      .project-item figure {
+        height: 400px;
+        width: 100%;
+      }
+
+      .project-item figure img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+    </style>
+  </head>
   <body>
     <div class="site-content">
-      <header
-        class="site-header"
-        data-bg-image="/images/cityloft/9.JPG"
-        style="min-height: 400px"
-      >
-        <h2
-          style="
-            display: flex;
-            height: 325px;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
-            font-size: 40px;
-            font-weight: 700;
-            line-height: 1.1;
-            color: #fff;
-            margin-bottom: 19px;
-          "
-        >
-          City Loft One
-        </h2>
-        <div class="container">
+      <header class="site-header">
+        <div class="container container-logo">
           <a href="/index.html" class="branding">
             <img src="/images/logo.png" alt="Apartments" />
             <h1 class="site-title">Fuente Triangle</h1>
@@ -82,108 +306,42 @@
             >
           </a>
         </div>
-        <div class="banner">
-          <div class="banner-content">
-            <div class="container">
-              <div class="cta">
-                <div
-                  style="
-                    padding: 10px 0px;
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                  "
-                >
-                  <div
-                    style="
-                      height: 81px;
-                      width: 133px;
-                      background-color: #fff;
-                      flex-shrink: 0;
-                    "
-                  ></div>
-                  <div style="display: flex; align-items: center">
-                    <div
-                      style="
-                        border-right: 1px solid #37322f;
-                        padding: 1.5rem;
-                        text-align: left;
-                      "
-                    >
-                      <h5 style="font-size: 10px">LOCATION</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        General Maxilom Ave. Cebu City
-                      </h6>
-                    </div>
-                    <div
-                      style="
-                        border-right: 1px solid #37322f;
-                        padding: 1.5rem;
-                        text-align: left;
-                      "
-                    >
-                      <h5 style="font-size: 10px">UNITS</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        300 Residential Units
-                      </h6>
-                    </div>
-                    <div
-                      style="
-                        border-right: 1px solid #37322f;
-                        padding: 1.5rem;
-                        text-align: left;
-                      "
-                    >
-                      <h5 style="font-size: 10px">COMMERCIAL SPACES</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        35 Commercial Spaces
-                      </h6>
-                    </div>
-                    <div
-                      style="
-                        border-right: 1px solid #37322f;
-                        padding: 1.5rem;
-                        text-align: left;
-                      "
-                    >
-                      <h5 style="font-size: 10px">BUILDING</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        18 Storeys
-                      </h6>
-                    </div>
-                    <div
-                      style="
-                        border-right: 1px solid #37322f;
-                        padding: 1.5rem;
-                        text-align: left;
-                      "
-                    >
-                      <h5 style="font-size: 10px">STATUS</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        Pre-Selling
-                      </h6>
-                    </div>
-                    <div style="padding: 1.5rem; text-align: left">
-                      <h5 style="font-size: 10px">Unit Type</h5>
-                      <h6
-                        style="font-size: 13px; font-weight: 400; color: #fff"
-                      >
-                        Condominium
-                      </h6>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+        <div class="nhome-banner">
+          <figure class="nhome-banner-fig">
+            <img src="/images/banner/5.jpg" alt="" />
+          </figure>
+        </div>
+        <div class="container">
+          <div class="property-details">
+            <div class="property-logo">
+              <figure>
+                <img src="/images/logo.png" alt="" />
+              </figure>
+            </div>
+            <div class="property-item">
+              <h5>Location</h5>
+              <h6>General Maxilom Ave. Cebu City</h6>
+            </div>
+            <div class="property-item">
+              <h5>Residential Units</h5>
+              <h6>300 Residential Units</h6>
+            </div>
+            <div class="property-item">
+              <h5>Commercial spaces</h5>
+              <h6>35 Commercial Spaces</h6>
+            </div>
+            <div class="property-item">
+              <h5>Building</h5>
+              <h6>18 Storeys</h6>
+            </div>
+            <div class="property-item">
+              <h5>Status:</h5>
+              <h6>Pre-Selling</h6>
+            </div>
+            <div class="property-item">
+              <h5>Unit Type</h5>
+              <h6>Condominium</h6>
             </div>
           </div>
         </div>
@@ -191,46 +349,11 @@
       <!-- .site-header -->
 
       <main class="main-content">
-        <div class="fullwidth-block" style="padding-bottom: 0">
-          <div
-            class="container"
-            style="display: flex; flex-direction: column; gap: 55px"
-          >
-            <div
-              style="
-                padding-bottom: 2rem;
-                background-image: linear-gradient(
-                  90deg,
-                  #d0d0d0 50%,
-                  hsla(0, 0%, 100%, 0) 0
-                );
-                background-position: bottom;
-                background-size: 10px 1px;
-                background-repeat: repeat-x;
-              "
-            >
-              <h2
-                style="
-                  color: #b79e69;
-                  font-size: 20px;
-                  font-weight: 600;
-                  line-height: 1.25;
-                  margin-bottom: 6px;
-                  text-transform: uppercase;
-                "
-              >
-                Prime Location
-              </h2>
-              <h3
-                style="
-                  color: #303030;
-                  font-size: 24px;
-                  font-weight: 600;
-                  line-height: 1.33;
-                "
-              >
-                Urban Living at its Best
-              </h3>
+        <div class="fullwidth-block">
+          <div class="container">
+            <div class="divider-bottom">
+              <h4 class="section-title">Prime Location</h4>
+              <h3 class="section-subtitle">Urban Living at its Best</h3>
               <p>
                 City Loft One offers the best value for owning a home in the
                 city — an opportunity to invest in a property that’s truly worth
@@ -245,42 +368,9 @@
                 within reach !
               </p>
             </div>
-
-            <div
-              style="
-                padding-bottom: 2rem;
-                background-image: linear-gradient(
-                  90deg,
-                  #d0d0d0 50%,
-                  hsla(0, 0%, 100%, 0) 0
-                );
-                background-position: bottom;
-                background-size: 10px 1px;
-                background-repeat: repeat-x;
-              "
-            >
-              <h2
-                style="
-                  color: #b79e69;
-                  font-size: 20px;
-                  font-weight: 600;
-                  line-height: 1.25;
-                  margin-bottom: 6px;
-                  text-transform: uppercase;
-                "
-              >
-                Property Features
-              </h2>
-              <h3
-                style="
-                  color: #303030;
-                  font-size: 24px;
-                  font-weight: 600;
-                  line-height: 1.33;
-                "
-              >
-                Premium Comfort, Practical Value
-              </h3>
+            <div class="divider-bottom">
+              <h4 class="section-title">Property Features</h4>
+              <h3 class="section-subtitle">Premium Comfort, Practical Value</h3>
               <ul class="arrow-list">
                 <li>24-Hour Security</li>
                 <li>2 High-speed Elevators</li>
@@ -293,48 +383,16 @@
                 <li>Gym</li>
               </ul>
             </div>
-
-            <div
-              style="
-                padding-bottom: 2rem;
-                background-image: linear-gradient(
-                  90deg,
-                  #d0d0d0 50%,
-                  hsla(0, 0%, 100%, 0) 0
-                );
-                background-position: bottom;
-                background-size: 10px 1px;
-                background-repeat: repeat-x;
-              "
-            >
-              <h2
-                style="
-                  color: #b79e69;
-                  font-size: 20px;
-                  font-weight: 600;
-                  line-height: 1.25;
-                  margin-bottom: 6px;
-                  text-transform: uppercase;
-                "
-              >
-                Location
-              </h2>
-              <h3
-                style="
-                  color: #303030;
-                  font-size: 24px;
-                  font-weight: 600;
-                  line-height: 1.33;
-                "
-              >
+            <div class="divider-bottom">
+              <h4 class="section-title">Location</h4>
+              <h3 class="section-subtitle">
                 21a General Maxilom AveCebu City, 6000 Cebu
               </h3>
               <p>
                 Cityloft Condominium General Maxilom Ave. Cebu City. Beside old
                 Sacred Heart School for Boys and right across DOLE-7 building
               </p>
-
-              <div style="height: 500px; width: 100%">
+              <div class="google-map-location">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4697.184482637989!2d123.90195347503534!3d10.310257989811557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a999dd85f1aa2d%3A0xc043f7c3bf63ea4b!2sCitiloft%20Condominium!5e1!3m2!1sen!2sph!4v1753370419929!5m2!1sen!2sph"
                   width="100%"
@@ -346,254 +404,216 @@
                 ></iframe>
               </div>
             </div>
+            <div class="divider-bottom">
+              <h4 class="section-title">CitiLoft Views</h4>
+              <h3 class="section-subtitle">Your Future Home, Today</h3>
 
-            <div
-              style="
-                padding-bottom: 2rem;
-                background-image: linear-gradient(
-                  90deg,
-                  #d0d0d0 50%,
-                  hsla(0, 0%, 100%, 0) 0
-                );
-                background-position: bottom;
-                background-size: 10px 1px;
-                background-repeat: repeat-x;
-              "
-            >
-              <h2
-                style="
-                  color: #b79e69;
-                  font-size: 20px;
-                  font-weight: 600;
-                  line-height: 1.25;
-                  margin-bottom: 6px;
-                  text-transform: uppercase;
-                "
-              >
-                CitiLoft Views
-              </h2>
-              <h3
-                style="
-                  color: #303030;
-                  font-size: 24px;
-                  font-weight: 600;
-                  line-height: 1.33;
-                "
-              >
-                Your Future Home, Today
-              </h3>
+              <div class="filter-links filterable-nav">
+                <select class="mobile-filter">
+                  <option value="*">Show all</option>
+                  <option value=".citiloft">CitiLoft building exteriors</option>
+                  <option value=".unit">Unit interiors</option>
+                  <option value=".court">Pickleball court</option>
+                </select>
+                <a href="#" class="current wow fadeInRight" data-filter="*"
+                  >Show all</a
+                >
+                <a
+                  href="#"
+                  class="wow fadeInRight"
+                  data-wow-delay=".2s"
+                  data-filter=".citiloft"
+                  >CitiLoft building exteriors</a
+                >
+                <a
+                  href="#"
+                  class="wow fadeInRight"
+                  data-wow-delay=".4s"
+                  data-filter=".unit"
+                  >Unit interiors</a
+                >
+                <a
+                  href="#"
+                  class="wow fadeInRight"
+                  data-wow-delay=".6s"
+                  data-filter=".court"
+                  >Pickleball court</a
+                >
+              </div>
+              <div class="filterable-items">
+                <!-- UNIT -->
+                <a
+                  href="/images/unit/1.png"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/1.png" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/2.png"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/2.png" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/3.jpg"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/3.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/4.jpg"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/4.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/5.jpg"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/5.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/6.png"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/6.png" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/unit/7.png"
+                  class="project-item filterable-item unit glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/unit/7.png" alt="#" />
+                  </figure>
+                </a>
 
-              <div>
-                <div class="filter-links filterable-nav">
-                  <select class="mobile-filter">
-                    <option value="*">Show all</option>
-                    <option value=".citiloft">
-                      CitiLoft building exteriors
-                    </option>
-                    <option value=".unit">Unit interiors</option>
-                    <option value=".court">Pickleball court</option>
-                  </select>
-                  <a href="#" class="current wow fadeInRight" data-filter="*"
-                    >Show all</a
-                  >
-                  <a
-                    href="#"
-                    class="wow fadeInRight"
-                    data-wow-delay=".2s"
-                    data-filter=".citiloft"
-                    >CitiLoft building exteriors</a
-                  >
-                  <a
-                    href="#"
-                    class="wow fadeInRight"
-                    data-wow-delay=".4s"
-                    data-filter=".unit"
-                    >Unit interiors</a
-                  >
-                  <a
-                    href="#"
-                    class="wow fadeInRight"
-                    data-wow-delay=".6s"
-                    data-filter=".court"
-                    >Pickleball court</a
-                  >
-                </div>
+                <!-- CITYLOFT -->
+                <a
+                  href="/images/cityloft/1.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/1.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/2.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/2.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/3.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/3.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/4.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/4.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/5.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/5.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/6.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/6.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/7.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/7.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/8.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/8.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/9.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/9.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/10.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/10.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/11.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/11.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/12.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/12.jpg" alt="#" />
+                  </figure>
+                </a>
+                <a
+                  href="/images/cityloft/13.jpg"
+                  class="project-item filterable-item citiloft glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/cityloft/13.jpg" alt="#" />
+                  </figure>
+                </a>
 
-                <div class="filterable-items">
-                  <!-- UNIT -->
-                  <a
-                    href="/images/unit/1.png"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/1.png" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/2.png"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/2.png" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/3.jpg"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/3.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/4.jpg"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/4.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/5.jpg"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/5.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/6.png"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/6.png" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/unit/7.png"
-                    class="project-item filterable-item unit glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/unit/7.png" alt="#" />
-                    </figure>
-                  </a>
-
-                  <!-- CITYLOFT -->
-                  <a
-                    href="/images/cityloft/1.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/1.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/2.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/2.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/3.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/3.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/4.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/4.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/5.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/5.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/6.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/6.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/7.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/7.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/8.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/8.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/9.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/9.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/10.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/10.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/11.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/11.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/12.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/12.jpg" alt="#" />
-                    </figure>
-                  </a>
-                  <a
-                    href="/images/cityloft/13.jpg"
-                    class="project-item filterable-item citiloft glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/cityloft/13.jpg" alt="#" />
-                    </figure>
-                  </a>
-
-                  <!-- COURT -->
-                  <a
-                    href="/images/court/1.jpg"
-                    class="project-item filterable-item court glightbox"
-                  >
-                    <figure class="featured-image">
-                      <img src="/images/court/1.jpg" alt="#" />
-                    </figure>
-                  </a>
-                </div>
+                <!-- COURT -->
+                <a
+                  href="/images/court/1.jpg"
+                  class="project-item filterable-item court glightbox"
+                >
+                  <figure class="featured-image">
+                    <img src="/images/court/1.jpg" alt="#" />
+                  </figure>
+                </a>
               </div>
             </div>
           </div>
@@ -606,6 +626,7 @@
             &copy; <span id="year"></span> Fuente Triangle Realty Development
             Corporation. All rights reserved.
           </p>
+
           <div class="social-links">
             <a href="https://www.facebook.com/" target="_blank" class="facebook"
               ><i class="fa fa-facebook"></i
