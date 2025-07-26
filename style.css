@@ -1622,20 +1622,17 @@ form input[type="reset"]:hover {
 
 @media screen and (max-width: 990px) {
   .skitter {
-    max-width: 900px;
-    width: 900px !important;
+    max-width: 1000px;
+    width: 1000px !important;
   }
 
   .container-skitter {
-    height: 500px;
+    height: 420px;
     position: relative;
   }
-
-  .skitter-large-box {
-    display: none;
-  }
-  .skitter-large-box.mobile-skitter {
-    display: block;
+  .skitter .box_clone img {
+    width: 100%;
+    height: auto;
   }
 }
 
