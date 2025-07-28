@@ -1650,6 +1650,7 @@ form input[type="reset"]:hover {
   font-size: 1.4285714286em;
   margin: 10px 0 5px;
   font-weight: 400;
+  display: block;
 }
 .branding .site-description {
   font-size: 13px;
