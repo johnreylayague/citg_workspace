@@ -18,6 +18,7 @@
       interval: 3000,
       dots: false,
       stop_over: false,
+      auto_play: true,
     });
   });
 
