@@ -2210,3 +2210,29 @@ form input[type="reset"]:hover {
 .social-links a.pinterest {
   background-color: #ca2128;
 }
+#back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  display: none;
+  z-index: 9999;
+
+  width: 45px;
+  height: 45px;
+  border: none;
+  background-color: #262322;
+  color: #ffffff;
+
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+#back-to-top:hover {
+  background-color: #3a3736;
+}
+
+#back-to-top i {
+  line-height: 45px;
+}

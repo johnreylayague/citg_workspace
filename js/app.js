@@ -1,5 +1,40 @@
 (function ($, document, window) {
   $(document).ready(function () {
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 300) {
+        $("#back-to-top").fadeIn();
+      } else {
+        $("#back-to-top").fadeOut();
+      }
+    });
+
+    $("#back-to-top").click(function () {
+      document.documentElement.scrollTop = 0; // for modern browsers
+      document.body.scrollTop = 0; // for older Safari
+      return false;
+    });
+
+    const addImages = (folder, count, type, exclude = []) => {
+      for (let i = 1; i <= count; i++) {
+        if (exclude.includes(i)) continue;
+
+        const imageBlock = `
+      <a href="${folder}/${i}.JPG" class="project-item filterable-item ${type} glightbox">
+        <figure class="featured-image">
+          <img src="${folder}/${i}.JPG" alt="${type} image ${i}" />
+        </figure> 
+      </a> 
+    `;
+
+        $("#filterable-gallery").append(imageBlock);
+      }
+    };
+
+    // Add images from each folder
+    addImages("/images/unit", 68, "unit");
+    addImages("/images/cityloft", 13, "cityloft");
+    addImages("/images/court", 1, "court");
+
     // Cloning main navigation for mobile menu
     $(".mobile-navigation").append($(".main-navigation .menu").clone());
 
