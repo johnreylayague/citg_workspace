@@ -30,7 +30,32 @@
       }
     };
 
-    // Add images from each folder
+    const addVideos = (folder, count, type, thumbnailFolder, exclude = []) => {
+      for (let i = 1; i <= count; i++) {
+        if (exclude.includes(i)) continue;
+
+        const videoPath = `${folder}/${i}.mp4`;
+        const thumbPath = `${thumbnailFolder}/${i}.JPG`; // Thumbnail image
+
+        const videoBlock = `
+      <a href="${videoPath}" class="project-item filterable-item ${type} glightbox" data-type="video">
+        <figure class="featured-image">
+          <img src="${thumbPath}" alt="${type} video ${i}" />
+        </figure>
+      </a>
+    `;
+
+        $("#filterable-gallery").append(videoBlock);
+      }
+    };
+
+    // Add 2 video items from the /assets/videos folder
+    // Thumbnails for these videos are located in /assets/thumbnails
+    // These will be tagged with the "unit" type/class
+    addVideos("/assets/videos", 2, "unit", "/assets/thumbnails");
+
+    // Add 68 image items from the /images/unit folder
+    // These images are tagged with the "unit" type/class
     addImages("/images/unit", 68, "unit");
     addImages("/images/cityloft", 13, "cityloft");
     addImages("/images/court", 1, "court");
