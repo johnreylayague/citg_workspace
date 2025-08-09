@@ -1,0 +1,193 @@
+$flaticon_mycollection-font: "flaticon_mycollection";
+
+@font-face {
+    font-family: $flaticon_mycollection-font;
+    src: url("./flaticon_mycollection.ttf?d0a42862ceccca72552511f572a1bfa5") format("truetype"),
+url("./flaticon_mycollection.woff?d0a42862ceccca72552511f572a1bfa5") format("woff"),
+url("./flaticon_mycollection.woff2?d0a42862ceccca72552511f572a1bfa5") format("woff2"),
+url("./flaticon_mycollection.eot?d0a42862ceccca72552511f572a1bfa5#iefix") format("embedded-opentype"),
+url("./flaticon_mycollection.svg?d0a42862ceccca72552511f572a1bfa5#flaticon_mycollection") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_mycollection !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+$flaticon_mycollection-map: (
+    "project": "\f101",
+    "architecture": "\f102",
+    "new-house": "\f103",
+    "technical-drawing": "\f104",
+    "interior-design": "\f105",
+    "3d-modeling": "\f106",
+    "drawing-compass": "\f107",
+    "measure": "\f108",
+    "sketch": "\f109",
+    "graphic-tool": "\f10a",
+    "kitchen": "\f10b",
+    "concrete": "\f10c",
+    "plan": "\f10d",
+    "ruler": "\f10e",
+    "plan-1": "\f10f",
+    "measure-1": "\f110",
+    "green-house": "\f111",
+    "government": "\f112",
+    "apartments": "\f113",
+    "living-room": "\f114",
+    "architecture-1": "\f115",
+    "wood": "\f116",
+    "modern-house": "\f117",
+    "cosmetic-factory": "\f118",
+    "house": "\f119",
+    "airplane": "\f11a",
+    "user": "\f11b",
+    "email": "\f11c",
+    "open": "\f11d",
+    "sms": "\f11e",
+    "placeholder": "\f11f",
+    "phone-call": "\f120",
+    "inbox": "\f121",
+    "mortgage": "\f122",
+    "health-insurance": "\f123",
+    "tax": "\f124",
+    "conversion": "\f125",
+    "fast-response": "\f126",
+    "right-quote": "\f127",
+    "left-quote": "\f128",
+    "home": "\f129",
+    "brickwall": "\f12a",
+);
+
+.flaticon-project:before {
+    content: map-get($flaticon_mycollection-map, "project");
+}
+.flaticon-architecture:before {
+    content: map-get($flaticon_mycollection-map, "architecture");
+}
+.flaticon-new-house:before {
+    content: map-get($flaticon_mycollection-map, "new-house");
+}
+.flaticon-technical-drawing:before {
+    content: map-get($flaticon_mycollection-map, "technical-drawing");
+}
+.flaticon-interior-design:before {
+    content: map-get($flaticon_mycollection-map, "interior-design");
+}
+.flaticon-3d-modeling:before {
+    content: map-get($flaticon_mycollection-map, "3d-modeling");
+}
+.flaticon-drawing-compass:before {
+    content: map-get($flaticon_mycollection-map, "drawing-compass");
+}
+.flaticon-measure:before {
+    content: map-get($flaticon_mycollection-map, "measure");
+}
+.flaticon-sketch:before {
+    content: map-get($flaticon_mycollection-map, "sketch");
+}
+.flaticon-graphic-tool:before {
+    content: map-get($flaticon_mycollection-map, "graphic-tool");
+}
+.flaticon-kitchen:before {
+    content: map-get($flaticon_mycollection-map, "kitchen");
+}
+.flaticon-concrete:before {
+    content: map-get($flaticon_mycollection-map, "concrete");
+}
+.flaticon-plan:before {
+    content: map-get($flaticon_mycollection-map, "plan");
+}
+.flaticon-ruler:before {
+    content: map-get($flaticon_mycollection-map, "ruler");
+}
+.flaticon-plan-1:before {
+    content: map-get($flaticon_mycollection-map, "plan-1");
+}
+.flaticon-measure-1:before {
+    content: map-get($flaticon_mycollection-map, "measure-1");
+}
+.flaticon-green-house:before {
+    content: map-get($flaticon_mycollection-map, "green-house");
+}
+.flaticon-government:before {
+    content: map-get($flaticon_mycollection-map, "government");
+}
+.flaticon-apartments:before {
+    content: map-get($flaticon_mycollection-map, "apartments");
+}
+.flaticon-living-room:before {
+    content: map-get($flaticon_mycollection-map, "living-room");
+}
+.flaticon-architecture-1:before {
+    content: map-get($flaticon_mycollection-map, "architecture-1");
+}
+.flaticon-wood:before {
+    content: map-get($flaticon_mycollection-map, "wood");
+}
+.flaticon-modern-house:before {
+    content: map-get($flaticon_mycollection-map, "modern-house");
+}
+.flaticon-cosmetic-factory:before {
+    content: map-get($flaticon_mycollection-map, "cosmetic-factory");
+}
+.flaticon-house:before {
+    content: map-get($flaticon_mycollection-map, "house");
+}
+.flaticon-airplane:before {
+    content: map-get($flaticon_mycollection-map, "airplane");
+}
+.flaticon-user:before {
+    content: map-get($flaticon_mycollection-map, "user");
+}
+.flaticon-email:before {
+    content: map-get($flaticon_mycollection-map, "email");
+}
+.flaticon-open:before {
+    content: map-get($flaticon_mycollection-map, "open");
+}
+.flaticon-sms:before {
+    content: map-get($flaticon_mycollection-map, "sms");
+}
+.flaticon-placeholder:before {
+    content: map-get($flaticon_mycollection-map, "placeholder");
+}
+.flaticon-phone-call:before {
+    content: map-get($flaticon_mycollection-map, "phone-call");
+}
+.flaticon-inbox:before {
+    content: map-get($flaticon_mycollection-map, "inbox");
+}
+.flaticon-mortgage:before {
+    content: map-get($flaticon_mycollection-map, "mortgage");
+}
+.flaticon-health-insurance:before {
+    content: map-get($flaticon_mycollection-map, "health-insurance");
+}
+.flaticon-tax:before {
+    content: map-get($flaticon_mycollection-map, "tax");
+}
+.flaticon-conversion:before {
+    content: map-get($flaticon_mycollection-map, "conversion");
+}
+.flaticon-fast-response:before {
+    content: map-get($flaticon_mycollection-map, "fast-response");
+}
+.flaticon-right-quote:before {
+    content: map-get($flaticon_mycollection-map, "right-quote");
+}
+.flaticon-left-quote:before {
+    content: map-get($flaticon_mycollection-map, "left-quote");
+}
+.flaticon-home:before {
+    content: map-get($flaticon_mycollection-map, "home");
+}
+.flaticon-brickwall:before {
+    content: map-get($flaticon_mycollection-map, "brickwall");
+}

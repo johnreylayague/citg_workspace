@@ -1,0 +1,146 @@
+@font-face {
+    font-family: "flaticon_mycollection";
+    src: url("./flaticon_mycollection.ttf?d0a42862ceccca72552511f572a1bfa5") format("truetype"),
+url("./flaticon_mycollection.woff?d0a42862ceccca72552511f572a1bfa5") format("woff"),
+url("./flaticon_mycollection.woff2?d0a42862ceccca72552511f572a1bfa5") format("woff2"),
+url("./flaticon_mycollection.eot?d0a42862ceccca72552511f572a1bfa5#iefix") format("embedded-opentype"),
+url("./flaticon_mycollection.svg?d0a42862ceccca72552511f572a1bfa5#flaticon_mycollection") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon_mycollection !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-project:before {
+    content: "\f101";
+}
+.flaticon-architecture:before {
+    content: "\f102";
+}
+.flaticon-new-house:before {
+    content: "\f103";
+}
+.flaticon-technical-drawing:before {
+    content: "\f104";
+}
+.flaticon-interior-design:before {
+    content: "\f105";
+}
+.flaticon-3d-modeling:before {
+    content: "\f106";
+}
+.flaticon-drawing-compass:before {
+    content: "\f107";
+}
+.flaticon-measure:before {
+    content: "\f108";
+}
+.flaticon-sketch:before {
+    content: "\f109";
+}
+.flaticon-graphic-tool:before {
+    content: "\f10a";
+}
+.flaticon-kitchen:before {
+    content: "\f10b";
+}
+.flaticon-concrete:before {
+    content: "\f10c";
+}
+.flaticon-plan:before {
+    content: "\f10d";
+}
+.flaticon-ruler:before {
+    content: "\f10e";
+}
+.flaticon-plan-1:before {
+    content: "\f10f";
+}
+.flaticon-measure-1:before {
+    content: "\f110";
+}
+.flaticon-green-house:before {
+    content: "\f111";
+}
+.flaticon-government:before {
+    content: "\f112";
+}
+.flaticon-apartments:before {
+    content: "\f113";
+}
+.flaticon-living-room:before {
+    content: "\f114";
+}
+.flaticon-architecture-1:before {
+    content: "\f115";
+}
+.flaticon-wood:before {
+    content: "\f116";
+}
+.flaticon-modern-house:before {
+    content: "\f117";
+}
+.flaticon-cosmetic-factory:before {
+    content: "\f118";
+}
+.flaticon-house:before {
+    content: "\f119";
+}
+.flaticon-airplane:before {
+    content: "\f11a";
+}
+.flaticon-user:before {
+    content: "\f11b";
+}
+.flaticon-email:before {
+    content: "\f11c";
+}
+.flaticon-open:before {
+    content: "\f11d";
+}
+.flaticon-sms:before {
+    content: "\f11e";
+}
+.flaticon-placeholder:before {
+    content: "\f11f";
+}
+.flaticon-phone-call:before {
+    content: "\f120";
+}
+.flaticon-inbox:before {
+    content: "\f121";
+}
+.flaticon-mortgage:before {
+    content: "\f122";
+}
+.flaticon-health-insurance:before {
+    content: "\f123";
+}
+.flaticon-tax:before {
+    content: "\f124";
+}
+.flaticon-conversion:before {
+    content: "\f125";
+}
+.flaticon-fast-response:before {
+    content: "\f126";
+}
+.flaticon-right-quote:before {
+    content: "\f127";
+}
+.flaticon-left-quote:before {
+    content: "\f128";
+}
+.flaticon-home:before {
+    content: "\f129";
+}
+.flaticon-brickwall:before {
+    content: "\f12a";
+}

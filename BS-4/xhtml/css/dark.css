@@ -1,0 +1,407 @@
+/*==========================
+	Custom css
+==========================*/
+/* Home 1 */
+.loading-1#loading-area,
+.loading-2#loading-area,
+.loading-3#loading-area,
+.loading-4#loading-area{
+	background-color:#1d1f23;
+}
+.rev-slider-full:after{
+	background: rgb(0,0,0);
+    background: -moz-linear-gradient(top, rgba(29,31,35,0) 0%, rgba(29,31,35,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(29,31,35,0) 0%,rgba(29,31,35,1) 100%);
+    background: linear-gradient(to bottom, rgba(29,31,35,0) 0%,rgba(29,31,35,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#ffffff',GradientType=0 );
+}
+.header-transparent .is-fixed .main-bar {
+    background-color: rgba(0,0,0,0.95);
+}
+.contact-box .form-control,
+.page-dark .page-content,
+.page-dark .page-wraper,
+.page-dark .section-full,
+.dark-1 .section-full{
+	background-color:#1d1f23 !important;
+}
+.widget-title,
+ol.comment-list li.comment .comment-author .fn,
+.section-head.contact-title h2,
+.contact-box .section-head h2,
+.loading-2 .loader2,
+.loading-1 .loader1,
+.slide3 > ul li a,
+.about-us h2,
+.client-says .testimonial-position,
+.client-says .testimonial-text p,
+h1 a, h2 a, h3 a, h4 a, h5 a, h6 a,
+.filter-style2 li.active a, 
+.filter-style1 li.active a,
+h1, h2, h3, h4, h5, h6 {
+	color: #fff;
+}
+.author-profile-content ul li a,
+.recent-post-bx.blog-post .dlab-post-text p,
+ol.comment-list li.comment p,
+.slide-social li,
+.blog-post.blog-single .dlab-post-meta i,
+.dlab-post-meta a,
+.share-post .slide-social li a,
+.blog-post.blog-single .dlab-post-text p,
+.blog-post.blog-half.blog-half1 .dlab-post-text p,
+.video-content-box h6,
+.section-head.style1 .pre-title,
+.section-head.style2 .pre-title,
+.section-head.style2 p,
+.extra-content,
+.history-head h2,
+.history-box p,
+.contact-box .icon-content p,
+.section-head .pre-title,
+.exhibition-bx p,
+.project-info .project-time,
+.project-info .project-description,
+.about-us p,
+body,
+.blog-post .dlab-post-text p,
+.filter-style2 li a, 
+.filter-style1 li a,
+.sr-iconbox p {
+	color: #c0c0c0;
+}
+.client-says .testimonial-name,
+.dlab-post-meta ul li{
+	color:var(--text-color)
+}
+.team-carousel .owl-nav .owl-prev span, 
+.team-carousel .owl-nav .owl-next span{
+	color:#fff;
+}
+.btn.black.btn-aware,
+.btn.outline.black{
+	color: #fff;
+    border-color: #fff;
+}
+.btn.black.btn-aware span {
+    background-color: #fff;
+}
+.btn.outline.black:hover{
+	color:#000;
+}
+.videoplay-bx{
+	color: #000;
+    background-color: var(--bg-color);
+}
+.testimonial-two-dots-bx.owl-theme .owl-dots .owl-dot span{
+	background-color:#fff;
+}
+.header-archia .header-nav .nav > li .sub-menu li a {
+    color: #fff;
+}
+.table-option{
+	transition:all 0.5s;
+}
+.dark.table-option:hover, 
+.dark.table-option.active,
+.table-option:hover, 
+.table-option.active{
+	background-color: var(--bg-color);
+	border: 2px solid var(--bg-color);
+	transition:all 0.5s;
+}
+.table-option .pricingtable-features li,
+.table-option .pricingtable-title *,
+.table-option .pricingtable-bx {
+	color: #fff;
+}
+.table-option:hover .pricingtable-features li,
+.table-option:hover .pricingtable-title *,
+.table-option:hover .pricingtable-bx,
+.table-option.active .pricingtable-features li,
+.table-option.active .pricingtable-title *,
+.table-option.active .pricingtable-bx {
+	color:#000;
+}
+.header-nav.full-sidenav .nav > li > a{
+	    color: #fff;
+}
+.header-nav .nav > li .sub-menu,
+.site-header .full-sidenav{
+	    background: #1e2024;
+}
+/* Home 2 */
+.dark-2 .header-full.style1 .main-bar{
+	background-color:#0a101d;	
+}
+.project-area-info .project-area,
+.project-area:after,
+.dark-2 .section-full{
+	background-color:#151d2c !important;
+}
+.section-head .head-title,
+.blog-grid.style1 .dlab-post-text .post-title a,
+.client-box-full .testimonial-text p,
+.project-area .section-head .head-title,
+.form-box .title,
+.list-details li,
+.about-year span{
+	color: #fff;
+}
+.blog-grid.style1 .dlab-post-text p,
+.project-area .section-head p,
+.form-box .sign,
+.about-bx1-content p {
+    color: #acacac;
+}
+.project-slider:after {
+	background: var(--bg-color);
+}
+.list-details li{
+	border-top: 1px solid rgba(255,255,255,0.1);
+}
+.form-box {
+	background: #111929;
+}
+.form-box .form-control{
+	background: #212c43;
+}
+.form-box .btn{
+	background: var(--bg-color);
+}
+.blog-grid.style1 .dlab-post-meta ul li{
+	color:#fff;
+}
+.sr-numbox .box-number,
+.blog-grid.style1 .dlab-post-text .post-date i,
+.client-box-full .testimonial-detail .testimonial-name,
+.filter-style2 li.active a{
+	color: var(--text-color);
+}
+.portbox3 .port-title a{
+	color:#000;
+}
+.sr-numbox .box-number:after,
+.project-info-box .project-content,
+.project-area .btn.black {
+	background-color: var(--bg-color);
+}
+.item.project-area:after{
+	content:"";
+}
+.table-option {
+	border: 2px solid #b2cdff;
+}
+.table-option .pricingtable-bx {
+
+}
+.team-slider .owl-dots .owl-dot span{
+	background:#fff;
+}
+.team-info-contact .text-black{
+	color:#fff;
+}
+.team-slider .owl-dots .owl-dot.active{
+	border: 2px solid var(--bg-color);
+}
+.team-slider .owl-dots .owl-dot:hover span, 
+.team-slider .owl-dots .owl-dot.active span{
+	background:var(--bg-color);
+}
+.project-info{
+	background-color: #050d15;
+	background-blend-mode: hard-light;
+}
+
+.project-info .text-black,
+.project-info .info-number,
+.project-info .project-title{
+	color:#fff;
+}
+.exhibition-carousel:after{
+	background-color:#191b20;
+}
+.exhibition-bx .exhibition-name{
+	color:#fff;
+	opacity:0.1;
+}
+.header-full.bgimg-scale .main-bar{
+	background-image: url(../images/scale-white.png);
+}
+.dark-3 .section-full {
+    background-color: #1c1f23 !important;
+}
+.dark-3 .header-full.style1 .main-bar{
+	background-color: #1c1f23 !important;
+}
+.latest-project-info{
+	background:#121213;
+}
+.header-archia .is-fixed .header-nav .nav > li > a, 
+.header-archia .is-fixed .contact-info span, 
+.header-archia .is-fixed .contact-info h4{
+	color:#fff;
+}
+/* inner */
+.dlab-bnr-inr .breadcrumb-row {
+	background-color: #3c4450;
+}
+.about-bx{
+	box-shadow: 20px 0 20px 0 rgba(0,0,0,0.1);
+	background:#fff;
+}
+.history-head h3,
+.dlab-bnr-inr .breadcrumb-row ul li a,
+.progress-section .progress-bx .count-box,
+.archia-counter .counter{
+	color: var(--text-color);
+}
+.error-page .error-head,
+.coming-head h2 span,
+.video-content-box h2,
+.about-me .about-me-info .widget_getintuch strong,
+.progress-bx-info .text-black,
+.archia-counter .text-black,
+.dlab-bnr-inr .breadcrumb-row ul li, 
+.dlab-bnr-inr .breadcrumb-row ul li:after{
+	color: #fff;
+}
+.dlab-bnr-inr .breadcrumb-row ul li:first-child a{
+	border-right: 1px solid rgba(255,255,255,0.1);
+}
+.dlab-bnr-inr .breadcrumb-row ul li:last-child{
+	color:#fff;
+}
+.about-me .about-me-info .widget_getintuch li,
+.about-me .about-me-info .sub-title {
+	color: rgba(255,255,255,0.4);
+}
+.contact-box .form-control:hover, 
+.contact-box .form-control:active, 
+.contact-box .form-control:focus{
+	border-color:var(--text-color);
+}
+.inner-client .client-says .testimonial-position,
+.inner-client .client-says .testimonial-text p,
+.inner-client .section-head .head-title{
+	color:#000;
+}
+.inner-client .testimonial-two-dots-bx.owl-theme .owl-dots .owl-dot span{
+	background-color:#000;
+}
+.inner-client .testimonial-two-dots-bx.owl-theme .owl-dots .owl-dot.active span{
+	background-color:var(--bg-color);
+}
+.video-full.overlay-black-dark:after{
+	opacity:0.8;
+}
+.video-content-box a.video{
+	background: var(--bg-color);
+	color:#fff;
+}
+.coming-soon{
+	background-image: url(../images/background/dark/bg10.jpg) !important;
+}
+.error-page .dz_error,
+.countdown .date .time{
+	color: var(--text-color);
+}
+.countdown .date div strong{
+	color:#fff;
+}
+.coming-head h2 strong{
+	color:var(--text-color);
+}
+.blog-post .dlab-info{
+	background:#3c4450;
+}
+.blog-post.blog-half.blog-half1 .dlab-post-title{
+	background:#1d1f23;
+}
+.pagination-bx.radius {
+	border-top: 1px solid rgba(255,255,255,0.2);
+}
+ol.comment-list li.comment .reply a {
+	color: #fff !important;
+}
+.recent-post-bx.blog-post .dlab-info{
+	background:#1d1f23;
+}
+.widget_archive ul li {
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.widget-bx{
+	box-shadow: 5px 10px 0px 0px #3c4450;
+	border: 2px solid #3c4450;
+}
+.widget-title{
+	border-bottom: 2px solid rgba(255,255,255,0.2);
+}
+.widget_tag_cloud a{
+	background-color: var(--bg-color);
+    border: 1px solid var(--bg-color);
+	color: #fff;
+}
+.side-bar .widget_tag_cloud.radius a:hover,
+.widget_tag_cloud.radius a:hover,
+.widget_tag_cloud a:hover{
+	background-color: var(--bg-color-ho);
+	border: 1px solid var(--bg-color-ho);
+}
+ol.comment-list li.comment .comment-body{
+	border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.dlab-separator.bg-black{
+	background:#fff;
+}
+.author-box{
+	background:#1d1f23;
+	border: 2px solid #3c4450;
+}
+.dlab-post-tags{
+	border-top: 1px solid #3c4450;
+}
+.blog-post.blog-single .dlab-post-text blockquote p,
+blockquote{
+	background:#1d1f23;
+	color:#fff;
+}
+.swiper-image{
+	background-color:#1d1f23;
+}
+.swiper-container .swiper-pagination span{
+	color: #fff;
+	text-shadow:none;
+}
+.header-full.style1.white .main-bar{
+	background-color:#1c1f23;
+}
+@media only screen and (max-width: 991px){
+	
+	.header.dark .header-nav .nav > li > a, 
+	.header-transparent .header-nav .nav > li > a, 
+	.header.primary .header-nav .nav > li > a, 
+	.header.blue .header-nav .nav > li > a, 
+	.header.purpal .header-nav .nav > li > a, 
+	.header.red .header-nav .nav > li > a, 
+	.header.yellow .header-nav .nav > li > a, 
+	.header.box.dark .header-nav .nav > li > a, 
+	.header.box.overlay .header-nav .nav > li > a, 
+	.header-curve [class*="bg-"] .header-nav .nav > li.active > a,
+	.site-header .header-nav .nav > li.active > a, 
+	.site-header .header-nav .nav > li.current-menu-item > a .header-nav .nav > li .sub-menu li a:hover, 
+	.site-header .header-nav .nav > li:hover > a, .site-header .header-nav .nav > li .mega-menu > li ul a:hover, 
+	.site-header .header-nav .nav > li .sub-menu li:hover > a {
+		color: #fff;
+	}
+	.blog-half .post-info{
+		background-color: #000;
+	}
+	.header-archia .is-fixed .navbar-toggler span {
+		background-color: #fff;
+	}
+	.mo-left .header-nav{
+		background:#1d1f23 ;
+	}
+}
+
